@@ -6,7 +6,7 @@ import DataTables from 'material-ui-datatables';
 import Table from './Table';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
-let TABLE_COLS = [],TABLE_DATA = [],indexArray=[];
+let TABLE_COLS = [],TABLE_DATA = [],indexArray=[],names=[];
 class App extends Component {
 
 
@@ -19,7 +19,7 @@ constructor(props) {
   {
     key: 'name',
     label: 'Name',
-    render: (name, all) => <TextField onChange={(e)=>this.setState({name:e.target.name})}/>
+    render: (name, all) => <TextField onBlur={this.handleName.bind(this)}/>
   },
   {
     key: 'friend',
@@ -39,10 +39,14 @@ handleChange(event){
 	this.setState({count:event.target.value});
 
 }
+handleName(event){
+names.push(event.target.value);
+names=names.filter(Boolean);
+}
 handleSubmit(){
 	TABLE_DATA=[];
-	let count =this.state.count,index=1;
-      while(index<=count){
+	let count =this.state.count,index=0;
+      while(index<count){
       
       let newValue={
           number:index,
@@ -57,9 +61,9 @@ handleSubmit(){
       while(indexArray[randomValue]==value.number){
       randomValue=(Math.floor(Math.random()*(count)));	
       }
-      value.friend=indexArray[randomValue];
+      value.friend=names[randomValue];
 
-      indexArray.splice(randomValue,1);
+      names.splice(randomValue,1);
       count--;
   })
   this.setState({Data:TABLE_DATA});
