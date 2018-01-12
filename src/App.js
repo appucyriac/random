@@ -6,9 +6,7 @@ import DataTables from 'material-ui-datatables';
 import Table from './Table';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
-let TABLE_COLS = [
-  ],
-    TABLE_DATA = [],indexArray=[];
+let TABLE_COLS = [],TABLE_DATA = [],indexArray=[];
 class App extends Component {
 
 
@@ -38,7 +36,6 @@ constructor(props) {
     
 }
 handleChange(event){
-	console.log(event.target.value);
 	this.setState({count:event.target.value});
 
 }
@@ -67,9 +64,6 @@ handleSubmit(){
   })
   this.setState({Data:TABLE_DATA});
 }
-
-
-
 
   render() {
     return (
