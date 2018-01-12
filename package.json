@@ -2,7 +2,7 @@
   "name": "random-friend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://appucyriac.github.io/random",
   "dependencies": {
     "gh-pages": "^1.1.0",
     "material-ui-datatables": "^0.18.2",
