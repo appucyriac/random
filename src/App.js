@@ -6,7 +6,7 @@ import DataTables from 'material-ui-datatables';
 import Table from './Table';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css'
-let TABLE_COLS = [],TABLE_DATA = [],indexArray=[],names=[];
+let TABLE_COLS = [],TABLE_DATA = [],names=[];
 class App extends Component {
 
 
@@ -46,7 +46,6 @@ names=names.filter(Boolean);
 }
 handleSubmit(){
 	TABLE_DATA=[];
-  indexArray=[];
   names = Array.from(new Set(names));
 	let count =this.state.count,index=0;
       while(index<count){
@@ -54,10 +53,9 @@ handleSubmit(){
       let newValue={
           name:names[index],
           number:index,
-          friend:0
+          friend:""
         }
         TABLE_DATA.push(newValue);
-        indexArray.push(index);
         index++;
   }
   
@@ -66,22 +64,19 @@ handleSubmit(){
 handleAssign(){
   
   let count =this.state.count,index=0;
-  TABLE_DATA.map(function(value){
+  TABLE_DATA.map((value)=>{
     value.name=names[index]
     index++;
   })
-  TABLE_DATA.map(function(value){
-    let slicedNames=names.slice(0);
-    let sliceIndex=slicedNames.indexOf(value.name);
+  TABLE_DATA.map((value)=>{
+    let   slicedNames=names.slice(0);
+    let   sliceIndex=slicedNames.indexOf(value.name);
     if(sliceIndex>=0)
-    {slicedNames.splice(sliceIndex,1);}
+       slicedNames.splice(sliceIndex,1);
     let   randomValue=(Math.floor(Math.random()*(slicedNames.length)));
       value.friend=slicedNames[randomValue];
       let randomIndex=names.indexOf(slicedNames[randomValue]);
       names.splice(randomIndex,1);
-
-      
-      indexArray.splice(randomValue,1);
   })
   this.setState({Data:TABLE_DATA});
   }
@@ -89,8 +84,10 @@ handleAssign(){
     return (
       <div>
        <MuiThemeProvider> 
+        <div class="countInput">
         <TextField label="Enter Count" onChange={this.handleChange.bind(this)}/>
-        <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+        <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Generate</Button>
+        </div>
 
         
         <DataTables
