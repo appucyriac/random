@@ -52,6 +52,7 @@ handleSubmit(){
       while(index<count){
       
       let newValue={
+          name:names[index],
           number:index,
           friend:0
         }
@@ -59,24 +60,38 @@ handleSubmit(){
         indexArray.push(index);
         index++;
   }
-  TABLE_DATA.map(function(value){
-  	  let 	randomValue=(Math.floor(Math.random()*(count)));
-      while(names[randomValue]==value.name){
-      randomValue=(Math.floor(Math.random()*(count)));	
-      }
-      value.friend=names[randomValue];
-
-      names.splice(randomValue,1);
-      count--;
-  })
+  
   this.setState({Data:TABLE_DATA});
 }
+handleAssign(){
+  
+  let count =this.state.count,index=0;
+  TABLE_DATA.map(function(value){
+    value.name=names[index]
+    index++;
+  })
+  TABLE_DATA.map(function(value){
+    let slicedNames=names.slice(0);
+    let sliceIndex=slicedNames.indexOf(value.name);
+    if(sliceIndex>=0)
+    {slicedNames.splice(sliceIndex,1);}
+    let   randomValue=(Math.floor(Math.random()*(slicedNames.length)));
+      value.friend=slicedNames[randomValue];
+      let randomIndex=names.indexOf(slicedNames[randomValue]);
+      names.splice(randomIndex,1);
 
+      
+      indexArray.splice(randomValue,1);
+  })
+  this.setState({Data:TABLE_DATA});
+  }
   render() {
     return (
       <div>
        <MuiThemeProvider> 
         <TextField label="Enter Count" onChange={this.handleChange.bind(this)}/>
+        <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+
         
         <DataTables
   		        height={'auto'}
@@ -86,7 +101,7 @@ handleSubmit(){
   		        showCheckboxes={false}
   		 />
 	</MuiThemeProvider>
-	<Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="assignButton" onClick={this.handleSubmit.bind(this)}>Assign randomly</Button>
+	<Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="assignButton" onClick={this.handleAssign.bind(this)}>Assign randomly</Button>
     </div>
     );
   }
