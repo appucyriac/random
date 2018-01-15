@@ -61,7 +61,7 @@ handleSubmit(){
   }
   TABLE_DATA.map(function(value){
   	  let 	randomValue=(Math.floor(Math.random()*(count)));
-      while(indexArray[randomValue]==value.number){
+      while(names[randomValue]==value.name){
       randomValue=(Math.floor(Math.random()*(count)));	
       }
       value.friend=names[randomValue];
