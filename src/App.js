@@ -46,6 +46,7 @@ names=names.filter(Boolean);
 }
 handleSubmit(){
 	TABLE_DATA=[];
+  indexArray=[];
   names = Array.from(new Set(names));
 	let count =this.state.count,index=0;
       while(index<count){
