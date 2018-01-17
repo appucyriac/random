@@ -71,10 +71,16 @@ handleAssign(){
   TABLE_DATA.map((value)=>{
     let   slicedNames=names.slice(0);
     let   sliceIndex=slicedNames.indexOf(value.name);
-    if(sliceIndex>=0)
-       slicedNames.splice(sliceIndex,1);
-    let   randomValue=(Math.floor(Math.random()*(slicedNames.length)));
+     if(sliceIndex>=0)
+        slicedNames.splice(sliceIndex,1);
+      let   randomValue=(Math.floor(Math.random()*(slicedNames.length)));
       value.friend=slicedNames[randomValue];
+      if(value.friend==null || value.friend=="")
+      {
+        value.friend=TABLE_DATA[value.number].friend;
+        TABLE_DATA[value.number].friend=value.name;
+
+      }
       let randomIndex=names.indexOf(slicedNames[randomValue]);
       names.splice(randomIndex,1);
   })
