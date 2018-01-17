@@ -77,8 +77,8 @@ handleAssign(){
       value.friend=slicedNames[randomValue];
       if(value.friend==null || value.friend=="")
       {
-        value.friend=TABLE_DATA[value.number].friend;
-        TABLE_DATA[value.number].friend=value.name;
+        value.friend=TABLE_DATA[(value.number-1)].friend;
+        TABLE_DATA[(value.number-1)].friend=value.name;
 
       }
       let randomIndex=names.indexOf(slicedNames[randomValue]);
